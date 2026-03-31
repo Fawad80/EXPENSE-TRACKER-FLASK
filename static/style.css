@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
+
+/* ── ROOT TOKENS ─────────────────────────────────── */
+:root {
+  --bg:        #0d0f14;
+  --surface:   #151820;
+  --card:      #1c2030;
+  --border:    #2a2f45;
+  --accent:    #f0c040;
+  --accent2:   #4af0a0;
+  --danger:    #f05060;
+  --text:      #e8eaf0;
+  --muted:     #7a80a0;
+  --radius:    12px;
+  --font-head: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+/* ── RESET ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── BASE ────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding: 0 0 80px;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -10%, rgba(240,192,64,.12), transparent),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.02) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.02) 40px);
+}
+
+/* ── HEADER ──────────────────────────────────────── */
+center h1 {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  padding: 48px 20px 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+}
+
+/* ── LAYOUT CONTAINER ────────────────────────────── */
+body > h2,
+body > form,
+body > hr,
+body > p,
+body > div {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ── SECTION HEADINGS ────────────────────────────── */
+h2 {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 40px auto 16px;
+  max-width: 680px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── FORM ────────────────────────────────────────── */
+form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.4);
+}
+
+label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+  margin-top: 10px;
+  display: block;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 10px 14px;
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(240,192,64,.15);
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(.6);
+  cursor: pointer;
+}
+
+form br { display: none; }
+
+button[type="submit"] {
+  margin-top: 20px;
+  background: var(--accent);
+  color: #0d0f14;
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: transform .15s, box-shadow .15s;
+}
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(240,192,64,.35);
+}
+button[type="submit"]:active { transform: translateY(0); }
+
+/* ── CATEGORY PILLS ──────────────────────────────── */
+body > h2 + p,
+body > h2 ~ a {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Category filter links wrapper — they come right after Categories h2 */
+body a[href^="/filter/"] {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  text-decoration: none;
+  transition: background .2s, color .2s, border-color .2s;
+  margin-bottom: 6px;
+}
+body a[href^="/filter/"]:hover {
+  background: var(--accent);
+  color: #0d0f14;
+  border-color: var(--accent);
+}
+
+/* pill container */
+body > .pills-row {
+  max-width: 680px;
+  margin: 0 auto 8px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── EXPENSE CARDS ───────────────────────────────── */
+body > p {
+  display: none; /* hide loose <p> that Jinja puts outside cards */
+}
+
+/* Each expense block is a series of <p> tags between <hr> tags.
+   We simulate card look by targeting the whole group. */
+hr {
+  max-width: 680px;
+  margin: 0 auto;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* The expense entries: wrap each group in a styled card via adjacent sibling magic */
+body > p + p,
+body > p:first-of-type { display: block; }
+
+/* ── BETTER: style the expense section as a whole ── */
+.expenses-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* We'll use a JS-free approach: target consecutive <p> groups */
+/* Since the template outputs raw <p> tags, we style them inline */
+body > p[data-expense] { display: none; }
+
+/* ── Inline expense card style (applied via <p> tag grouping) ── */
+/* Real approach: wrap with a div in Jinja, but since we can't touch HTML,
+   we style each <p> that sits between <hr> tags */
+body > p {
+  display: block;
+  max-width: 680px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* First <p> of each group gets card start appearance */
+body > p:has(strong) {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px 4px;
+  margin-top: 0;
+}
+
+/* All <p> inside a card strip (approximation) */
+body > p strong {
+  color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Amount stands out */
+body > p strong + * { color: var(--text); }
+
+/* ── EDIT / DELETE LINKS ──────────────────────────── */
+a[href^="/edit/"] {
+  color: var(--accent2);
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border: 1px solid var(--accent2);
+  border-radius: 6px;
+  transition: background .2s, color .2s;
+}
+a[href^="/edit/"]:hover {
+  background: var(--accent2);
+  color: #0d0f14;
+}
+
+a[href^="/delete/"] {
+  color: var(--danger);
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border: 1px solid var(--danger);
+  border-radius: 6px;
+  transition: background .2s, color .2s;
+}
+a[href^="/delete/"]:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* action row */
+body > b {
+  display: inline-block;
+  max-width: 680px;
+  padding-left: 0;
+}
+
+/* ── OVERVIEW SECTION ────────────────────────────── */
+body > h2:last-of-type ~ p {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  max-width: 680px;
+  margin: 0 auto 8px;
+  padding: 14px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ── SCROLLBAR ───────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── ANIMATIONS ──────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+body > * {
+  animation: fadeUp .35s ease both;
+}
+body > *:nth-child(2)  { animation-delay: .05s; }
+body > *:nth-child(3)  { animation-delay: .10s; }
+body > *:nth-child(4)  { animation-delay: .15s; }
+body > *:nth-child(5)  { animation-delay: .20s; }
+body > *:nth-child(n+6) { animation-delay: .25s; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 480px) {
+  center h1 { font-size: 1.6rem; }
+  form { padding: 20px; }
+  button[type="submit"] { width: 100%; text-align: center; }
+}
