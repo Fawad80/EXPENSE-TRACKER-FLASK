@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Expense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <center>
+        <h1>EDIT RECORD</h1>
+    </center>
+
+    <h2>MODIFY EXPENSE #{{ expense.id }}</h2>
+    
+    <form method="POST" action="/edit/{{ expense.id }}">
+        
+        <label>Amount (₨):</label>
+        <input type="number" name="amount" value="{{ expense.amount }}" min="1" required>
+
+        <label>Description:</label>
+        <input type="text" name="description" value="{{ expense.description }}" required>
+
+        <label>Category:</label>
+        <select name="category" required>
+            {% for cat in categories %}
+                <option value="{{ cat }}" {% if cat == expense.category %}selected{% endif %}>
+                    {{ cat }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label>Date:</label>
+        <input type="date" name="date" value="{{ expense.date }}" required>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button type="submit">Update Record</button>
+            <a href="/" style="text-decoration: none; padding: 12px 28px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-family: var(--font-head); font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">Cancel</a>
+        </div>
+    </form>
+
+</body>
+</html>
